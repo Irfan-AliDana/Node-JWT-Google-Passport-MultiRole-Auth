@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Passport Authentication</title>
+        <style>
+            header .nav ul {
+                display: flex;
+                justify-content: center;
+                list-style-type: none;
+            }
+
+            .nav ul a {
+                color: black;
+                text-decoration: none;
+            }
+
+            .nav ul a:active {
+                color: burlywood;
+            }
+
+            .nav ul a:hover {
+                color: blue;
+            }
+
+            .nav ul li {
+                text-decoration: none;
+                padding: 10px;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="nav">
+                <ul>
+                    <a href="/">
+                        <li>Home</li>
+                    </a>
+                    <a href="/auth/google"> <li>Google Sign In</li> </a>
+                    <a href=""><li>Facebook Sign In</li></a>
+                    <a href="/profile"><li>Profile</li></a>
+                </ul>
+            </div>
+        </header>
+        <main>
+            <form action="/auth/login" method="POST">
+                <h3>Login</h3>
+                <label for="">Email</label>
+                <input type="email" name="email" id="" />
+                <label for="">Password</label>
+                <input type="password" name="password" id="" />
+                <br />
+                <br />
+                <button type="submit">Login</button>
+            </form>
+        </main>
+    </body>
+</html>

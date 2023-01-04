@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 
 const { employes } = require("../../models");
-const { createToken } = require("../../auth/jwt");
+const { createToken } = require("../../utils/auth");
 
 const register = (req, res) => {
     const { username, email, password } = req.body;
@@ -39,6 +39,7 @@ const login = async (req, res) => {
         res.cookie("access-token", accessToken, {
             maxAge: 60 * 60 * 24 * 30 * 1000,
             httpOnly: true,
+            // signed: true,
         });
         res.json("Logged In Successfully!");
     });

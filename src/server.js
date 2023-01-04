@@ -1,8 +1,5 @@
 const http = require("http");
 
-const express = require("express");
-const jwt = require("jsonwebtoken");
-
 const app = require("./app");
 const db = require("./models");
 
