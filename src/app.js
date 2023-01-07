@@ -8,7 +8,7 @@ require("dotenv").config();
 
 const app = express();
 
-const { verifyToken, verifyGoogleLogin } = require("./utils/auth");
+const { verifyToken, verifyGoogleLogin } = require("./middlewares/auth");
 const authRouter = require("./routers/auth/auth.router");
 
 const {
@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/profile", verifyToken, verifyGoogleLogin, (req, res) => {
-    res.json(`profile ${req.user.id}`);
+    res.json(`profile page`);
 });
 
 module.exports = app;

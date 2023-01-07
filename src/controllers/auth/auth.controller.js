@@ -4,13 +4,14 @@ const { employes } = require("../../models");
 const { createToken } = require("../../utils/auth");
 
 const register = (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
     bcrypt.hash(password, 10).then((hash) => {
         employes
             .create({
                 username: username,
                 email: email,
                 password: hash,
+                role: role,
             })
             .then(() => {
                 res.json("Employe Registered");
