@@ -10,6 +10,7 @@ const verifyToken = (req, res, next) => {
         const verifiedToken = verify(accessToken, process.env.SECRET);
 
         if (verifiedToken) {
+            req.user = verifiedToken;
             req.authenticated = true;
             next();
         }
@@ -29,7 +30,14 @@ const verifyGoogleLogin = (req, res, next) => {
     next();
 };
 
+const checkRoles = (roles) => (req, res, next) => {
+    !roles.includes(req.user.role)
+        ? res.status(401).json("You are not authorized!")
+        : next();
+};
+
 module.exports = {
     verifyToken,
     verifyGoogleLogin,
+    checkRoles,
 };

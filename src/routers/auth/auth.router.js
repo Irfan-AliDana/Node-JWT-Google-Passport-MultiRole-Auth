@@ -3,13 +3,19 @@ const passport = require("passport");
 
 const authRouter = express.Router();
 
-const { login, register } = require("../../controllers/auth/auth.controller");
+const {
+    login,
+    register,
+    verifyToken,
+} = require("../../controllers/auth/auth.controller");
 const validation = require("../../middlewares/validation");
 const employeSchema = require("../../validations/employe.validation");
 
 authRouter.post("/register", validation(employeSchema), register);
 
 authRouter.post("/login", login);
+
+authRouter.get("/:id/verify/:token", verifyToken);
 
 authRouter.get(
     "/google",

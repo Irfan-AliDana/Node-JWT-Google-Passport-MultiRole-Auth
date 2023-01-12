@@ -8,7 +8,11 @@ require("dotenv").config();
 
 const app = express();
 
-const { verifyToken, verifyGoogleLogin } = require("./middlewares/auth");
+const {
+    verifyToken,
+    verifyGoogleLogin,
+    checkRoles,
+} = require("./middlewares/auth");
 const authRouter = require("./routers/auth/auth.router");
 
 const {
@@ -44,8 +48,34 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
-app.get("/profile", verifyToken, verifyGoogleLogin, (req, res) => {
-    res.json(`profile page`);
-});
+app.get(
+    "/profile/admin",
+    verifyToken,
+    verifyGoogleLogin,
+    checkRoles(["admin"]),
+    (req, res) => {
+        res.json(`admin profile page`);
+    }
+);
+
+app.get(
+    "/profile/super-admin",
+    verifyToken,
+    verifyGoogleLogin,
+    checkRoles(["superadmin"]),
+    (req, res) => {
+        res.json(`superadmin profile page`);
+    }
+);
+
+app.get(
+    "/profile/both",
+    verifyToken,
+    verifyGoogleLogin,
+    checkRoles(["admin", "superadmin"]),
+    (req, res) => {
+        res.json(`admin and superadmin profile page`);
+    }
+);
 
 module.exports = app;
